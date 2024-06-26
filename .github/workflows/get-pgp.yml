@@ -29,14 +29,14 @@ jobs:
         if [ -f public_key.asc ]; then
           if diff public_key.asc new_public_key.asc > /dev/null ; then
             echo "The key has not changed."
-            echo "false" << $KEY_CHANGED
+            echo "false" >> $KEY_CHANGED
           else
             echo "The key has changed."
-            echo "true" << $KEY_CHANGED
+            echo "true" >> $KEY_CHANGED
           fi
         else
           echo "No existing key found."
-          echo "true" << $KEY_CHANGED
+          echo "true" >> $KEY_CHANGED
         fi
 
     - name: Commit and Push Public Key
