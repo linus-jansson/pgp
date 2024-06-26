@@ -8,6 +8,8 @@ on:
 jobs:
   fetch-upload-key:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - name: Checkout Repository
@@ -46,5 +48,3 @@ jobs:
         git add public_key.asc
         git commit -m "Update public key"
         git push origin main
-      env:
-        token: ${{ secrets.GITHUB_TOKEN }}
