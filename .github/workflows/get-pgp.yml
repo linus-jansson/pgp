@@ -40,7 +40,7 @@ jobs:
         fi
 
     - name: Commit and Push Public Key
-      if: $KEY_CHANGED == 'true'
+      if: env.KEY_CHANGED == 'true'
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
