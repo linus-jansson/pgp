@@ -29,18 +29,18 @@ jobs:
         if [ -f public_key.asc ]; then
           if diff public_key.asc new_public_key.asc > /dev/null ; then
             echo "The key has not changed."
-            echo "::set-output name=key_changed::false"
+            echo "false" << $KEY_CHANGED
           else
             echo "The key has changed."
-            echo "::set-output name=key_changed::true"
+            echo "true" << $KEY_CHANGED
           fi
         else
           echo "No existing key found."
-          echo "::set-output name=key_changed::true"
+          echo "true" << $KEY_CHANGED
         fi
 
     - name: Commit and Push Public Key
-      if: steps.check_key.outputs.key_changed == 'true'
+      if: $KEY_CHANGED == 'true'
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
